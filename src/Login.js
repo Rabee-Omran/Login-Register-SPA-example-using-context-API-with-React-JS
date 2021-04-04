@@ -1,18 +1,25 @@
 import {useState} from 'react';
+import  {AuthContext} from './AuthContext';
+import { useContext } from 'react';
+
 
 export default function Login ()  {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const authContext = useContext(AuthContext);
 
     function login (e){
-        e.preventDefault()
+        e.preventDefault();
         // console.log({email, password})
         //send api request to validate data and get token
         if (password === '12345'){
             const token = 'abc';
+
             localStorage.setItem('token', token);
             localStorage.setItem('email', email);
+            authContext.setauth({token, email});
+           
 
         }else{
             alert('Wrong data');

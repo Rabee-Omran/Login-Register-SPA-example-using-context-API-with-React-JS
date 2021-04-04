@@ -1,13 +1,26 @@
 import Header from './Header';
 import Login from './Login';
+import  {AuthProvider, AuthContext} from './AuthContext';
+import { useContext } from 'react';
 
 function App() {
+
+  const authContext = useContext(AuthContext);
+
+  
   return (
+   
     <div className="container">
      <Header/>
-     {false ? 'welcome ': <Login/> }
+     {authContext.auth.email ? 'welcome ': <Login/> }
     </div>
+ 
   );
 }
 
-export default App;
+function AppWithStore (){
+  return  <AuthProvider>
+             <App/>
+  </AuthProvider>
+}
+export default AppWithStore;
